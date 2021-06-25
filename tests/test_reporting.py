@@ -40,14 +40,12 @@ def generate_event(detail=None):
         ]
     }
 
-
-if __name__ == '__main__':
+def test_ccs():
     from handler import main
 
-    with open('loandata.json') as file:
+    with open('tests/loandata.json') as file:
         event = generate_event(json.load(file))
     response = main(event)
-
     logger.info('Reports: %s', json.dumps(response, indent=2))
-    with open('reports.json', 'w') as reports:
+    with open('tests/reports.json', 'w') as reports:
         json.dump(response, reports, indent=2)

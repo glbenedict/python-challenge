@@ -84,8 +84,21 @@ def main(event, context=None):  # pylint: disable=unused-argument
         logger.info(
             'Generated projection: %s', json.dumps(projection, indent=2)
         )
-
         reports.extend(projection.get('reports', []))
+
+        # Check to make sure both reports populated
+        if len(reports) == 2:
+            all_residences = len(reports[1].get('residences', []))
+
+            # Convert dicts to json strings
+            # Convert to set to remove redundant json strings then back to list
+            json_str_list = list(set([json.dumps(r) for r in reports[1].get('residences', [])]))
+
+            # If redundant residences were removed, then borrower and coborrower share an address
+            reports[0]['shared_address'] = True if all_residences > len(json_str_list) else False
+
+            # Convert back to dicts and assign to residences
+            reports[1]['residences'] = [json.loads(r) for r in json_str_list]
 
     # Reformat report output and return
     return {'reports': reports}

@@ -90,7 +90,10 @@ class Project:
 
         if len(paths) >= 2:
             paths = paths[1:]
-            paths.remove('resources')
+            try:
+                paths.remove('resources')
+            except Exception as error:
+                logger.error('\"resources\" not in paths')
             return paths, ext
 
         return None, None

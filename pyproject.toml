@@ -28,7 +28,7 @@ markers = []
 
 [tool.coverage.run]
 source = ["service"]
-command_line = '-m pytest tests'
+command_line = '-m pytest tests -s'
 dynamic_context = "test_function"
 
 [tool.coverage.html]

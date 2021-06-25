@@ -1,0 +1,175 @@
+INFO     handler:handler.py:46 Service invoked by event: {
+  "Records": [
+    {
+      "source": "testing.local",
+      "detail-type": "Local Testing",
+      "detail": "{\"applications\": [{\"borrower\": {\"firstName\": \"JANE\", \"lastName\": \"DOE\", \"mailingAddress\": {\"addressStreetLine1\": \"123 EXAMPLE PKWY.\", \"addressCity\": \"FLOWER MOUND\", \"addressState\": \"TX\", \"addressPostalCode\": \"75028\"}}, \"coborrower\": {\"firstName\": \"JOHN\", \"lastName\": \"DOE\", \"mailingAddress\": {\"addressStreetLine1\": \"123 EXAMPLE PKWY.\", \"addressCity\": \"FLOWER MOUND\", \"addressState\": \"TX\", \"addressPostalCode\": \"75028\"}}}], \"property\": {\"streetAddress\": \"456 NEW HOME CT.\", \"city\": \"FLOWER MOUND\", \"state\": \"TX\", \"postalCode\": \"75028\", \"value\": 368000}}"
+    }
+  ]
+}
+ERROR    service.dal:dal.py:96 "resources" not in paths
+DEBUG    service.dal:dal.py:64 Processing resource borrowers.json at D:\coding_challenge\python-challenge\resources\borrowers.json.
+ERROR    service.dal:dal.py:96 "resources" not in paths
+DEBUG    service.dal:dal.py:64 Processing resource residences.json at D:\coding_challenge\python-challenge\resources\residences.json.
+INFO     handler:handler.py:51 Service loaded rules: [
+  {
+    "source": "$.applications[0].borrower.firstName",
+    "target": "$.reports[?(@.title == 'Borrowers Report')].borrowers[0].first_name"
+  },
+  {
+    "source": "$.applications[0].borrower.lastName",
+    "target": "$.reports[?(@.title == 'Borrowers Report')].borrowers[0].last_name"
+  },
+  {
+    "source": "$.applications[0].coborrower.firstName",
+    "target": "$.reports[?(@.title == 'Borrowers Report')].borrowers[1].first_name"
+  },
+  {
+    "source": "$.applications[0].coborrower.lastName",
+    "target": "$.reports[?(@.title == 'Borrowers Report')].borrowers[1].last_name"
+  },
+  {
+    "source": "$.applications[0].borrower.mailingAddress.addressStreetLine1",
+    "target": "$.reports[?(@.title == 'Residences Report')].residences[0].street"
+  },
+  {
+    "source": "$.applications[0].borrower.mailingAddress.addressCity",
+    "target": "$.reports[?(@.title == 'Residences Report')].residences[0].city"
+  },
+  {
+    "source": "$.applications[0].borrower.mailingAddress.addressState",
+    "target": "$.reports[?(@.title == 'Residences Report')].residences[0].state"
+  },
+  {
+    "source": "$.applications[0].borrower.mailingAddress.addressPostalCode",
+    "target": "$.reports[?(@.title == 'Residences Report')].residences[0].zip"
+  },
+  {
+    "source": "$.applications[0].coborrower.mailingAddress.addressStreetLine1",
+    "target": "$.reports[?(@.title == 'Residences Report')].residences[1].street"
+  },
+  {
+    "source": "$.applications[0].coborrower.mailingAddress.addressCity",
+    "target": "$.reports[?(@.title == 'Residences Report')].residences[1].city"
+  },
+  {
+    "source": "$.applications[0].coborrower.mailingAddress.addressState",
+    "target": "$.reports[?(@.title == 'Residences Report')].residences[1].state"
+  },
+  {
+    "source": "$.applications[0].coborrower.mailingAddress.addressPostalCode",
+    "target": "$.reports[?(@.title == 'Residences Report')].residences[1].zip"
+  }
+]
+INFO     handler:handler.py:73 Service recieved loans: [
+  {
+    "applications": [
+      {
+        "borrower": {
+          "firstName": "JANE",
+          "lastName": "DOE",
+          "mailingAddress": {
+            "addressStreetLine1": "123 EXAMPLE PKWY.",
+            "addressCity": "FLOWER MOUND",
+            "addressState": "TX",
+            "addressPostalCode": "75028"
+          }
+        },
+        "coborrower": {
+          "firstName": "JOHN",
+          "lastName": "DOE",
+          "mailingAddress": {
+            "addressStreetLine1": "123 EXAMPLE PKWY.",
+            "addressCity": "FLOWER MOUND",
+            "addressState": "TX",
+            "addressPostalCode": "75028"
+          }
+        }
+      }
+    ],
+    "property": {
+      "streetAddress": "456 NEW HOME CT.",
+      "city": "FLOWER MOUND",
+      "state": "TX",
+      "postalCode": "75028",
+      "value": 368000
+    }
+  }
+]
+INFO     handler:handler.py:79 Generated manifest: {
+  "$.reports[?(@.title == 'Borrowers Report')].borrowers[0].first_name": "JANE",
+  "$.reports[?(@.title == 'Borrowers Report')].borrowers[0].last_name": "DOE",
+  "$.reports[?(@.title == 'Borrowers Report')].borrowers[1].first_name": "JOHN",
+  "$.reports[?(@.title == 'Borrowers Report')].borrowers[1].last_name": "DOE",
+  "$.reports[?(@.title == 'Residences Report')].residences[0].street": "123 EXAMPLE PKWY.",
+  "$.reports[?(@.title == 'Residences Report')].residences[0].city": "FLOWER MOUND",
+  "$.reports[?(@.title == 'Residences Report')].residences[0].state": "TX",
+  "$.reports[?(@.title == 'Residences Report')].residences[0].zip": "75028",
+  "$.reports[?(@.title == 'Residences Report')].residences[1].street": "123 EXAMPLE PKWY.",
+  "$.reports[?(@.title == 'Residences Report')].residences[1].city": "FLOWER MOUND",
+  "$.reports[?(@.title == 'Residences Report')].residences[1].state": "TX",
+  "$.reports[?(@.title == 'Residences Report')].residences[1].zip": "75028"
+}
+INFO     handler:handler.py:84 Generated projection: {
+  "reports": [
+    {
+      "title": "Borrowers Report",
+      "borrowers": [
+        {
+          "first_name": "JANE",
+          "last_name": "DOE"
+        },
+        {
+          "first_name": "JOHN",
+          "last_name": "DOE"
+        }
+      ]
+    },
+    {
+      "title": "Residences Report",
+      "residences": [
+        {
+          "street": "123 EXAMPLE PKWY.",
+          "city": "FLOWER MOUND",
+          "state": "TX",
+          "zip": "75028"
+        },
+        {
+          "street": "123 EXAMPLE PKWY.",
+          "city": "FLOWER MOUND",
+          "state": "TX",
+          "zip": "75028"
+        }
+      ]
+    }
+  ]
+}
+INFO     test_reporting:test_reporting.py:49 Reports: {
+  "reports": [
+    {
+      "title": "Borrowers Report",
+      "borrowers": [
+        {
+          "first_name": "JANE",
+          "last_name": "DOE"
+        },
+        {
+          "first_name": "JOHN",
+          "last_name": "DOE"
+        }
+      ],
+      "shared_address": true
+    },
+    {
+      "title": "Residences Report",
+      "residences": [
+        {
+          "street": "123 EXAMPLE PKWY.",
+          "city": "FLOWER MOUND",
+          "state": "TX",
+          "zip": "75028"
+        }
+      ]
+    }
+  ]
+}
